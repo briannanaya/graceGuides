@@ -1,0 +1,123 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #D0D9B3;
+  z-index: 1000; /* Ensure the navbar appears above other content */
+}
+
+ul {
+  list-style-type: none;
+  margin: 0 auto; /* This centers the ul element horizontally */
+  padding: 5px;
+  overflow: hidden;
+  border: 1px solid #D0D9B3;
+  background-color: #D0D9B3;
+  width:100%; /* Adjust the width as needed */
+  text-align: center; /* This centers the li elements inside the ul */
+}
+
+li {
+  display: inline-block; /* This ensures the li elements are displayed horizontally */
+  margin: 0 75px; /* Add more margin to separate each item */
+}
+
+li a, .dropbtn{
+  display: inline-block;
+  color: #666;
+  text-align: center;
+  padding: 16px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active), .dropdown:hover .dropbtn {
+  background-color: #96b37e;
+}
+  li.dropdown{
+    display: inline-block
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  .dropdown-content a:hover {background-color: #D0D9B3;}
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+li a.active {
+  color: white;
+  background-color: #04AA6D;
+}
+  .row{
+    padding-top: 0px;
+    margin-top: 0px;
+  }
+   .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 70px;
+    width: 5%;
+  }
+body {
+  background-color: #FAF9F6;
+  margin: 0;
+  padding: 0;
+}
+.content {
+  padding-top: 40px; /* Add space above the content */
+}
+h2{
+  color: #d0d9b3;
+  padding-left: 570px;
+  padding-right: 400px;
+}
+.para{
+  padding-top: 50px;
+  padding-bottom: 0px;
+  padding-left: 100px;
+  padding-right: 100px;
+  text-align: center;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 30px;
+  font-weight: 200;
+  color: #666;
+}
+p{
+  font-family: "Nunito Sans", sans-serif;
+  padding-left: 400px;
+  padding-right: 400px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 1.5;
+  letter-spacing: .5px;
+}
+h1{
+  padding-left: 450px;
+  padding-right:  450px;
+  color: #616161
+}
+iframe{
+  padding-left: 400px;
+  padding-right: 400px;
+  border: none;
+}
+footer{
+  background-color: #D0D9B3;
+  padding: 20px;
+  text-align: center;
+}
