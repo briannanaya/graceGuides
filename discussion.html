@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+  .note-item {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+  }
+
+  .note-item {
+    margin-bottom: 20px;
+    overflow-wrap: break-word;
+  }
+
+  .note-item {
+    margin-bottom: 10px;
+    overflow-wrap: break-word;
+    list-style-type: none;
+    /* removes bullet points */
+  }
+
+  .note-item::before {
+    content: "\2022";
+    /* Unicode character for a black dot */
+    color: black;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+    margin-right: 0.5em;
+  }
+
+  .tab {
+    display: inline-block;
+    width: 1px;
+    /* Adjust the width as needed */
+    height: 1px;
+    background-color: transparent;
+  }
+</style>
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journaling Notepad</title>
+  <link rel="stylesheet" href="../graceGuides/assets/css/disstyle.css">
+</head>
+
+<body>
+  <div class="navbar">
+    <ul>
+      <li><a href="indexnew.html">✝</a></li>
+      <li><a href="sermons.html">Sermons</a></li>
+      <li><a href="study.html">Scripture</a></li>
+      <li><a class="active" href="discussion.html">Notes</a></li>
+    </ul>
+  </div>
+  <h1>Journaling Notepad</Note>
+  </h1>
+  <main>
+    <label for="topic">Select a Topic:</label>
+    <select id="topic">
+      <option value="Anxiety">Anxiety</option>
+      <option value="Breakups">Breakups</option>
+      <option value="Burnout">Burnout</option>
+      <option value="Depression">Depression</option>
+      <option value="Financial Hardship">Financial Hardship</option>
+      <option value="Identity Exploration">Identity Exploration</option>
+      <option value="Insecurity">Insecurity</option>
+      <option value="Peer Pressure">Peer Pressure</option>
+      <option value="Pressure to Maintain a Perfect Image">Pressure to Maintain a Perfect Image</option>
+      <option value="Pressure to Succeed">Pressure to Succeed</option>
+      <option value="Social Adjustment">Social Adjustment</option>
+      <option value="Substance Abuse">Substance Abuse</option>
+      <option value="Suicide">Suicide</option>
+
+    </select>
+
+    <label for="note">Note:</label>
+    <textarea id="note" placeholder="Write your notes here..."></textarea>
+
+    <button onclick="applyBold()">Bold</button>
+    <button onclick="applyBulletPoint()">Bullet Point</button>
+    <button onclick="saveNote()">Save Note</button>
+    <button onclick="clearNotes()">Delete Saved Notes</button>
+
+    <div id="noteList"></div>
+  </main>
+
+  <script>
+    // Function to save a note in local storage
+    function saveNote() {
+      const topicInput = document.getElementById('topic');
+      const noteInput = document.getElementById('note');
+      const noteList = document.getElementById('noteList');
+
+      // Get existing notes or initialize an empty array
+      const savedNotes = JSON.parse(localStorage.getItem('christianNotes')) || [];
+
+      // Add the new note to the array with date and time
+      const currentDate = new Date();
+      const newNote = {
+        topic: topicInput.value,
+        note: noteInput.value,
+        timestamp: currentDate.toLocaleString()
+      };
+      savedNotes.push(newNote);
+
+      // Save the updated array back to local storage
+      localStorage.setItem('christianNotes', JSON.stringify(savedNotes));
+
+      // Clear the note input
+      noteInput.value = "";
+
+      // Display the list of notes
+      displayNotes();
+    }
+
+    function clearNotes() {
+      localStorage.removeItem('christianNotes');
+      displayNotes(); // Refresh the displayed notes
+    }
+
+    // Function to display saved notes
+    function displayNotes() {
+      const noteList = document.getElementById('noteList');
+      const savedNotes = JSON.parse(localStorage.getItem('christianNotes')) || [];
+
+      // Clear existing notes
+      noteList.innerHTML = '';
+
+      // Display each note in reverse order (most recent on top)
+      savedNotes.reverse().forEach((note, index) => {
+        const noteItem = document.createElement('div');
+        noteItem.classList.add('note-item');
+        noteItem.innerHTML = `
+          <strong>Topic:</strong> ${note.topic}<br>
+          <strong>Note:</strong><br>${formatNoteText(note.note)}<br>
+          <strong>Date and Time:</strong> ${note.timestamp}`;
+        noteList.appendChild(noteItem);
+      });
+    }
+
+    // Format note text with basic formatting
+    function formatNoteText(text) {
+      // Replace asterisks with <strong> tags for bold text
+      text = text.replace(/\*([^*]+)\*/g, '<strong>$1</strong>');
+
+      // Replace hyphens with <li> tags for bullet points
+      text = text.replace(/^- (.+)$/gm, '<li>$1</li>');
+
+      // Replace backticks with <span class="highlight"> tags for highlighting
+      text = text.replace(/`([^`]+)`/g, '<span class="highlight">$1</span>');
+
+      // Replace newline characters with <br> tags
+      text = text.replace(/\n/g, '<br>');
+
+      // Replace spaces with &nbsp;
+      text = text.replace(/ /g, '&nbsp;');
+
+      // Replace tabs with four non-breaking spaces
+      text = text.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;');
+
+      // Wrap the entire text in a <ul> tag if there are bullet points
+      if (text.includes('<li>')) {
+        text = `<ul>${text}</ul>`;
+      }
+
+      return text;
+    }
+
+    // Function to apply bold formatting to selected text
+    function applyBold() {
+      const noteInput = document.getElementById('note');
+      const start = noteInput.selectionStart;
+      const end = noteInput.selectionEnd;
+
+      // Get the selected text
+      const selectedText = noteInput.value.substring(start, end);
+
+      // Add asterisks to the selected text for bold formatting
+      const newText = `${noteInput.value.substring(0, start)}*${selectedText}*${noteInput.value.substring(end)}`;
+
+      // Update the textarea with the formatted text
+      noteInput.value = newText;
+
+      // Set the cursor position between the two asterisks
+      noteInput.setSelectionRange(start + 1, start + 1);
+      // Focus on the textarea
+      noteInput.focus();
+    }
+
+    // Function to apply bullet point to selected text
+    function applyBulletPoint() {
+      const noteInput = document.getElementById('note');
+      const start = noteInput.selectionStart;
+      const end = noteInput.selectionEnd;
+
+      // Get the selected text
+      const selectedText = noteInput.value.substring(start, end);
+
+      // Add a black dot bullet point to the selected text
+      const newText = `${noteInput.value.substring(0, start)}• ${selectedText}${noteInput.value.substring(end)}`;
+
+      // Update the textarea with the formatted text
+      noteInput.value = newText;
+
+      // Set the cursor position after the black dot and space
+      noteInput.setSelectionRange(start + 2, start + 2);
+
+      // Focus on the textarea
+      noteInput.focus();
+    }
+
+    // Function to handle keydown events in the note textarea
+    function handleTabKey(event) {
+      if (event.key === 'Tab') {
+        event.preventDefault(); // Prevent the default tab behavior
+        insertTabAtCursor();
+      }
+    }
+
+    // Function to insert a tab character at the current cursor position
+    function insertTabAtCursor() {
+      const noteInput = document.getElementById('note');
+      const start = noteInput.selectionStart;
+      const end = noteInput.selectionEnd;
+
+      // Insert a tab character at the cursor position
+      const newText = `${noteInput.value.substring(0, start)}\t${noteInput.value.substring(end)}`;
+
+      // Update the textarea with the modified text
+      noteInput.value = newText;
+
+      // Set the cursor position after the inserted tab
+      noteInput.setSelectionRange(start + 1, start + 1);
+
+      // Focus on the textarea
+      noteInput.focus();
+    }
+
+    // Add event listener to the note textarea
+    document.getElementById('note').addEventListener('keydown', handleTabKey);
+  </script>
+  <footer class="footer">
+    <p>&copy; 2024 GraceGuides. All Rights Reserved.</p>
+  </footer>
+</body>
+
+</html>
