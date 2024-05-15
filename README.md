@@ -1,0 +1,2 @@
+GraceGuides is a Christian resources website designed to provide biblical advice and encouragement to people who are struggling with anxiety, depression, identity and much more. There are video sermons, Bible verses, and linked articles — all sorted by topic. We even included a journaling tool! All done in a visually clean, fluid, and easy to use website!
+GraceGuides was built at a 24 hour hackathon, RowdyHacks in San Antonio, Texas.
