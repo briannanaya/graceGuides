@@ -7,10 +7,7 @@ GraceGuides is a Christian resource website built at RowdyHacks, a 24 hour hacka
 
 ## Demos
 
-
-A visual of the Responsive Web Design.
-
-1. Videos
+1. Video
 
 https://github.com/user-attachments/assets/bf124f85-74ec-40f0-80bf-53f6d57d5472
 
