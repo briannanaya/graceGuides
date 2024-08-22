@@ -1,13 +1,5 @@
 # graceGuides
 
-### Contributors
-
-- Brianna Anaya Carrasco 
-- Odalys Chacon 
-- Jayce Bishop
-- Anthony Guzman
-
-
 ## Overview
 
 GraceGuides is a Christian resource website built at RowdyHacks, a 24 hour hackathon, made using html, css, and javascript. GraceGuides is made to provide support and advice through Bible verses, articles, and sermons from trusted sources. 
@@ -38,6 +30,13 @@ Scripture Page
 
 Journal Page
 <img width="1432" alt="Screenshot 2024-08-22 at 7 30 16 AM" src="https://github.com/user-attachments/assets/d9c47c44-46ff-46c4-bfae-668133474e08">
+
+### Contributors
+
+- Brianna Anaya Carrasco 
+- Odalys Chacon 
+- Jayce Bishop
+- Anthony Guzman
 
 
 
