@@ -2,8 +2,8 @@
 
 ### Contributors
 
-- Brianna Anaya Carrasco (Front-end development & Lead)
-- Odalys Chacon (Front-end development)
+- Brianna Anaya Carrasco 
+- Odalys Chacon 
 -
 -
 
